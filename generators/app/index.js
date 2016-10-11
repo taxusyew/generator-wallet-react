@@ -97,7 +97,6 @@ module.exports = yeoman.Base.extend({
         "react-progressbar.js": "^0.2.0",
         "react-redux": "^4.4.5",
         "react-router": "^2.0.0",
-        "react-tap-event-plugin": "^1.0.0",
         "react-tappable": "^0.8.4",
         "react-transform-catch-errors": "^1.0.2",
         "react-transform-hmr": "^1.0.4",
