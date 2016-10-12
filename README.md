@@ -16,12 +16,38 @@ Then generate your new project:
 yo wallet-react
 ```
 
+## How to use
+cd into your project root direcotry and run the below command:
+```
+npm run start
+```
+
+## File Structure
+```
+project
+│   README.md
+│   .gitignore
+│   .babelrc
+│   webpack.config
+│
+└───App
+│   └─── component
+│   └─── reducer
+│   └─── scene
+│   └─── style
+│   └─── util
+│
+└───release
+    │   index.html
+```
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
  * Yeoman is a person with feelings and opinions, but is very easy to work with.
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
+
 
 ## License
 
