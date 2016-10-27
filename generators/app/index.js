@@ -75,48 +75,53 @@ module.exports = yeoman.Base.extend({
     pkg.license = this.props.projectLicense;
 
     extend(pkg, {
-      "main": "index.js",
-      "scripts": {
-        "start": "webpack-dev-server --inline --progress --colors --content-base release/ --history-api-fallback",
-        "dev": "webpack-dashboard -- webpack-dev-server --inline --progress --colors --content-base release/ --history-api-fallback",
-        "build": "webpack"
-      },
+        "main": "index.js",
+        "scripts": {
+            "dev": "cross-env NODE_ENV=dev webpack-dev-server --inline --progress --colors --content-base release/ --history-api-fallback",
+            "mock": "json-server --watch mock/apis.json --port 8008",
+            "start": "npm run mock && npm run dev",
+            "build": "cross-env NODE_ENV=production webpack -p"
+        },
         "dependencies": {
-        "autoprefixer": "^6.4.1",
-        "babel-eslint": "^6.1.2",
-        "babel-plugin-react-transform": "^2.0.2",
-        "babel-preset-stage-0": "^6.5.0",
-        "classnames": "^2.2.5",
-        "compression": "^1.6.1",
-        "express": "^4.13.4",
-        "extract-text-webpack-plugin": "^1.0.1",
-        "if-env": "^1.0.0",
-        "postcss-loader": "^0.13.0",
-        "react": "^0.14.7",
-        "react-dom": "^0.14.7",
-        "react-progressbar.js": "^0.2.0",
-        "react-redux": "^4.4.5",
-        "react-router": "^2.0.0",
-        "react-tappable": "^0.8.4",
-        "react-transform-catch-errors": "^1.0.2",
-        "react-transform-hmr": "^1.0.4",
-        "redbox-react": "^1.3.0",
-        "webpack-dashboard": "^0.1.8"
-      },
-      "devDependencies": {
-        "babel-core": "^6.5.1",
-        "babel-loader": "^6.2.2",
-        "babel-preset-es2015": "^6.5.0",
-        "babel-preset-react": "^6.5.0",
-        "css-loader": "^0.23.1",
-        "http-server": "^0.8.5",
-        "less": "^2.7.1",
-        "less-loader": "^2.2.3",
-        "redux": "^3.5.2",
-        "style-loader": "^0.13.1",
-        "webpack": "^1.12.13",
-        "webpack-dev-server": "^1.14.1"
-      }
+            "autoprefixer": "^6.4.1",
+            "babel-eslint": "^6.1.2",
+            "babel-plugin-react-transform": "^2.0.2",
+            "babel-preset-stage-0": "^6.5.0",
+            "classnames": "^2.2.5",
+            "compression": "^1.6.1",
+            "cross-env": "^3.1.3",
+            "express": "^4.13.4",
+            "extract-text-webpack-plugin": "^1.0.1",
+            "if-env": "^1.0.0",
+            "json-server": "^0.8.22",
+            "postcss-loader": "^0.13.0",
+            "react": "^0.14.7",
+            "react-dom": "^0.14.7",
+            "react-progressbar.js": "^0.2.0",
+            "react-redux": "^4.4.5",
+            "react-router": "^2.0.0",
+            "react-tap-event-plugin": "^1.0.0",
+            "react-tappable": "^0.8.4",
+            "react-transform-catch-errors": "^1.0.2",
+            "react-transform-hmr": "^1.0.4",
+            "redbox-react": "^1.3.0",
+            "webpack-dashboard": "^0.1.8"
+        },
+        "devDependencies": {
+            "babel-core": "^6.5.1",
+            "babel-loader": "^6.2.2",
+            "babel-preset-es2015": "^6.5.0",
+            "babel-preset-react": "^6.5.0",
+            "css-loader": "^0.23.1",
+            "http-server": "^0.8.5",
+            "less": "^2.7.1",
+            "less-loader": "^2.2.3",
+            "redux": "^3.5.2",
+            "style-loader": "^0.13.1",
+            "webpack": "^1.12.13",
+            "webpack-dev-server": "^1.14.1"
+        }
+
     });
     
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
@@ -131,6 +136,7 @@ module.exports = yeoman.Base.extend({
     mkdirp('app/style');
     mkdirp('app/util');
     mkdirp('release');
+    mkdirp('mock');
 
     // --------------
     // 复制文件
@@ -147,6 +153,7 @@ module.exports = yeoman.Base.extend({
       project_author: this.props.projectAuthor
     }));
 
+    // setup app folder
     this.fs.copy(
       this.templatePath('app/component/App.js'),
       this.destinationPath('app/component/App.js')
@@ -162,6 +169,18 @@ module.exports = yeoman.Base.extend({
       this.destinationPath('app/style/reset.css')
     );
 
+    // setup mock folder
+    this.fs.copy(
+      this.templatePath('mock/apis.json'),
+      this.destinationPath('mock/apis.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('mock/urlconfig.js'),
+      this.destinationPath('mock/urlconfig.js')
+    );
+
+    // setup other files
     this.fs.copy(
       this.templatePath('gitignore.txt'),
       this.destinationPath('.gitignore')

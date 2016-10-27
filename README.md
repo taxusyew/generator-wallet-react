@@ -17,9 +17,21 @@ yo wallet-react
 ```
 
 ## How to use
-cd into your project root direcotry and run the below command:
+### develop
+`cd` into your project root direcotry and run the below command:
 ```
 npm run start
+```
+
+if you can't startup both `json-server` and `webpack-dev-server` simultaneously through `npm run start`, you can individually call them:
+```
+npm run mock
+npm run dev
+```
+
+### production
+```
+npm run build
 ```
 
 ## File Structure
