@@ -1,0 +1,7 @@
+{
+    // the "foo" interface 
+    "foo": {
+        // set your json object
+        "bar": "hello world"
+    }
+}
