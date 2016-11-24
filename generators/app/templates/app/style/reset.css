@@ -1,10 +1,16 @@
 * {
 	padding: 0;
 	margin: 0;
-	-webkit-user-select: none;  
     -webkit-tap-highlight-color: transparent;
 }
 html, body {
+	-webkit-user-select: none;  
 	background-color: #FBF9FE;
 	color: #333;
+	height:100%;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+a, a:link, a:visited, a:hover, a:active {
+	color: #6492E3;
+	text-decoration: none;
 }

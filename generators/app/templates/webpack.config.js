@@ -32,12 +32,22 @@ module.exports = {
             {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader")
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    'file?hash=sha512&digest=hex&name=[hash].[ext]',
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
             }
         ]
     },
     postcss: [ autoprefixer({ browsers: ['last 5 iOS versions', 'last 5 and_chr versions'] }) ],
     
     plugins: [
+        new webpack.EnvironmentPlugin([
+            'NODE_ENV'
+        ]),
         new ExtractTextPlugin("[name]_[hash:6].css", {
             allChunks: true
         }),

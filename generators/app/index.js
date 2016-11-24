@@ -90,10 +90,12 @@ module.exports = yeoman.Base.extend({
                 "classnames": "^2.2.5",
                 "compression": "^1.6.1",
                 "cross-env": "^3.1.3",
+                "es6-promise": "^4.0.5",
                 "express": "^4.13.4",
                 "extract-text-webpack-plugin": "^1.0.1",
                 "html-webpack-plugin": "^2.24.1",
                 "if-env": "^1.0.0",
+                "image-webpack-loader": "^3.0.0",
                 "ip": "^1.1.4",
                 "json-server": "^0.8.22",
                 "open": "0.0.5",
@@ -111,18 +113,18 @@ module.exports = yeoman.Base.extend({
                 "webpack-dashboard": "^0.1.8"
             },
             "devDependencies": {
-                "babel-core": "^6.5.1",
-                "babel-loader": "^6.2.2",
-                "babel-preset-es2015": "^6.5.0",
-                "babel-preset-react": "^6.5.0",
-                "css-loader": "^0.23.1",
-                "http-server": "^0.8.5",
-                "less": "^2.7.1",
-                "less-loader": "^2.2.3",
-                "redux": "^3.5.2",
-                "style-loader": "^0.13.1",
-                "webpack": "^1.12.13",
-                "webpack-dev-server": "^1.14.1"
+                    "babel-core": "^6.5.1",
+                    "babel-loader": "^6.2.2",
+                    "babel-preset-es2015": "^6.5.0",
+                    "babel-preset-react": "^6.5.0",
+                    "css-loader": "^0.23.1",
+                    "http-server": "^0.8.5",
+                    "less": "^2.7.1",
+                    "less-loader": "^2.2.3",
+                    "redux": "^3.5.2",
+                    "style-loader": "^0.13.1",
+                    "webpack": "^1.12.13",
+                    "webpack-dev-server": "^1.14.1"
             }
 
         });
@@ -173,9 +175,15 @@ module.exports = yeoman.Base.extend({
             this.destinationPath('app/html/index.html')
         );
 
+        // copy css
         this.fs.copy(
             this.templatePath('app/style/reset.css'),
             this.destinationPath('app/style/reset.css')
+        );
+
+        this.fs.copy(
+            this.templatePath('app/style/stander.less'),
+            this.destinationPath('app/style/stander.less')
         );
 
         // setup mock folder
