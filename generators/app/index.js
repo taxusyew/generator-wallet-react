@@ -170,11 +170,6 @@ module.exports = yeoman.Base.extend({
             this.destinationPath('app/scene/index.js')
         );
 
-        this.fs.copy(
-            this.templatePath('app/html/index.html'),
-            this.destinationPath('app/html/index.html')
-        );
-
         // copy css
         this.fs.copy(
             this.templatePath('app/style/reset.css'),
