@@ -20,13 +20,7 @@ yo wallet-react
 ### develop
 `cd` into your project root direcotry and run the below command:
 ```
-npm run start
-```
-
-if you can't startup both `json-server` and `webpack-dev-server` simultaneously through `npm run start`, you can individually call them:
-```
-npm run mock
-npm run dev
+npm run server
 ```
 
 ### production
@@ -52,14 +46,6 @@ project
 └───release
     │   index.html
 ```
-
-## Getting To Know Yeoman
-
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
-
 
 ## License
 

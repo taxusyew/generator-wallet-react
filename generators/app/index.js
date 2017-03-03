@@ -77,10 +77,10 @@ module.exports = yeoman.Base.extend({
         extend(pkg, {
             "main": "index.js",
             "scripts": {
-                "dev": "cross-env NODE_ENV=dev webpack-dev-server --host 0.0.0.0 --watch-stdin --inline --progress --colors --content-base release/ --history-api-fallback",
-                "mock": "json-server --watch mock/apis.json --port 8008",
-                "start": "npm run mock && npm run dev",
-                "build": "cross-env NODE_ENV=production webpack -p"
+                "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --watch-stdin --inline --progress --colors --content-base release/ --history-api-fallback",
+                "server": "cross-env NODE_ENV=development node server/server.js",
+                "clean": "cd release && rm *",
+                "build": "cross-env NODE_ENV=production webpack -p --config webpack.build.config.js"
             },
             "dependencies": {
                 "autoprefixer": "^6.4.1",
@@ -138,11 +138,13 @@ module.exports = yeoman.Base.extend({
         mkdirp('app/component');
         mkdirp('app/reducer');
         mkdirp('app/scene');
+        mkdirp('app/scene/index');
         mkdirp('app/style');
         mkdirp('app/html');
         mkdirp('app/util');
         mkdirp('release');
         mkdirp('mock');
+        mkdirp('mock/api');
 
         // --------------
         // 复制文件
@@ -161,13 +163,13 @@ module.exports = yeoman.Base.extend({
 
         // setup app folder
         this.fs.copy(
-            this.templatePath('app/component/App.js'),
-            this.destinationPath('app/component/App.js')
+            this.templatePath('app/scene/app.js'),
+            this.destinationPath('app/scene/app.js')
         );
 
         this.fs.copy(
-            this.templatePath('app/scene/index.js'),
-            this.destinationPath('app/scene/index.js')
+            this.templatePath('app/scene/index/index.js'),
+            this.destinationPath('app/scene/index/index.js')
         );
 
         // copy css
@@ -179,17 +181,6 @@ module.exports = yeoman.Base.extend({
         this.fs.copy(
             this.templatePath('app/style/stander.less'),
             this.destinationPath('app/style/stander.less')
-        );
-
-        // setup mock folder
-        this.fs.copy(
-            this.templatePath('mock/apis.json'),
-            this.destinationPath('mock/apis.json')
-        );
-
-        this.fs.copy(
-            this.templatePath('mock/urlconfig.js'),
-            this.destinationPath('mock/urlconfig.js')
         );
 
         // setup other files
@@ -205,8 +196,29 @@ module.exports = yeoman.Base.extend({
 
 
         this.fs.copy(
-            this.templatePath('webpack.config.js'),
-            this.destinationPath('webpack.config.js')
+            this.templatePath('webpack.dev.config.js'),
+            this.destinationPath('webpack.dev.config.js')
+        );
+
+        this.fs.copy(
+            this.templatePath('webpack.build.config.js'),
+            this.destinationPath('webpack.build.config.js')
+        );
+
+        // setup server folder
+        this.fs.copy(
+            this.templatePath('server/server.js'),
+            this.destinationPath('server/server.js')
+        );
+
+        this.fs.copy(
+            this.templatePath('server/server-api.js'),
+            this.destinationPath('server/server-api.js')
+        );
+
+        this.fs.copy(
+            this.templatePath('server/server-webpack.js'),
+            this.destinationPath('server/server-webpack.js')
         );
 
     },

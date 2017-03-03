@@ -6,11 +6,8 @@ var ip = require('ip');
 var open = require("open");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// automatic open browser
-open('http://'+ip.address()+':8080');
-
 module.exports = {
-    entry: './app/scene/index.js',
+    entry: './app/scene/app.js',
 
     output: {
         path: 'release',
@@ -31,7 +28,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader")
+                loader: ExtractTextPlugin.extract("style-loader", "css?-autoprefixer!postcss!less")
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -42,7 +39,7 @@ module.exports = {
             }
         ]
     },
-    postcss: [ autoprefixer({ browsers: ['last 5 iOS versions', 'last 5 and_chr versions'] }) ],
+    postcss: [ autoprefixer({ browsers: ['iOS >= 8', 'Android >= 4.1'] }) ],
     
     plugins: [
         new webpack.EnvironmentPlugin([
@@ -64,7 +61,8 @@ module.exports = {
             template: 'app/html/index.html',
             hash: true
         }),
-        new webpack.HotModuleReplacementPlugin()
+        // new encodingPlugin('GBK'),
+        new webpack.HotModuleReplacementPlugin(),
     ]
 
 
