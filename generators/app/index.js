@@ -77,9 +77,8 @@ module.exports = yeoman.Base.extend({
         extend(pkg, {
             "main": "index.js",
             "scripts": {
-                "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --watch-stdin --inline --progress --colors --content-base release/ --history-api-fallback",
                 "server": "cross-env NODE_ENV=development node server/server.js",
-                "clean": "cd release && rm *",
+                "clean": "cd dist && rm *",
                 "build": "cross-env NODE_ENV=production webpack -p --config webpack.build.config.js"
             },
             "dependencies": {
@@ -92,7 +91,6 @@ module.exports = yeoman.Base.extend({
                 "cross-env": "^3.1.3",
                 "es6-promise": "^4.0.5",
                 "express": "^4.13.4",
-                "extract-text-webpack-plugin": "^1.0.1",
                 "html-webpack-plugin": "^2.24.1",
                 "if-env": "^1.0.0",
                 "image-webpack-loader": "^3.0.0",
@@ -100,31 +98,31 @@ module.exports = yeoman.Base.extend({
                 "json-server": "^0.8.22",
                 "open": "0.0.5",
                 "postcss-loader": "^0.13.0",
-                "react": "^0.14.7",
-                "react-dom": "^0.14.7",
-                "react-progressbar.js": "^0.2.0",
-                "react-redux": "^4.4.5",
-                "react-router": "^2.0.0",
+                "react": "^15.5.4",
+                "react-dom": "^15.5.4",
+                "react-redux": "^5.0.4",
+                "react-router": "^4.1.1",
                 "react-tap-event-plugin": "^1.0.0",
                 "react-tappable": "^0.8.4",
                 "react-transform-catch-errors": "^1.0.2",
                 "react-transform-hmr": "^1.0.4",
                 "redbox-react": "^1.3.0",
-                "webpack-dashboard": "^0.1.8"
+                "webpack": "^2.3.3"
             },
             "devDependencies": {
-                    "babel-core": "^6.5.1",
-                    "babel-loader": "^6.2.2",
-                    "babel-preset-es2015": "^6.5.0",
-                    "babel-preset-react": "^6.5.0",
-                    "css-loader": "^0.23.1",
-                    "http-server": "^0.8.5",
-                    "less": "^2.7.1",
-                    "less-loader": "^2.2.3",
-                    "redux": "^3.5.2",
-                    "style-loader": "^0.13.1",
-                    "webpack": "^1.12.13",
-                    "webpack-dev-server": "^1.14.1"
+                "babel-core": "^6.5.1",
+                "babel-loader": "^6.2.2",
+                "babel-preset-es2015": "^6.5.0",
+                "babel-preset-react": "^6.5.0",
+                "css-loader": "^0.23.1",
+                "extract-text-webpack-plugin": "^2.1.0",
+                "file-loader": "^0.11.1",
+                "http-server": "^0.8.5",
+                "less": "^2.7.1",
+                "less-loader": "^2.2.3",
+                "redux": "^3.5.2",
+                "style-loader": "^0.13.1",
+                "webpack-dev-server": "^1.14.1"
             }
 
         });
@@ -142,7 +140,7 @@ module.exports = yeoman.Base.extend({
         mkdirp('app/style');
         mkdirp('app/html');
         mkdirp('app/util');
-        mkdirp('release');
+        mkdirp('dist');
         mkdirp('mock');
         mkdirp('mock/api');
 

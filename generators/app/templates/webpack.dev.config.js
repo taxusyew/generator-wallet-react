@@ -1,10 +1,10 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var DashboardPlugin = require('webpack-dashboard/plugin');
 var autoprefixer = require('autoprefixer');
 var ip = require('ip');
 var open = require("open");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 // automatic open browser
 open('http://'+ip.address()+':8080');
@@ -13,42 +13,38 @@ module.exports = {
     entry: './app/scene/app.js',
 
     output: {
-        path: __dirname + '/release',
+        path: __dirname + '/dist',
         filename: 'bundle_[hash:6].js',
         publicPath: ''
     },
 
     module: {
-        loaders: [
+        rules: [
             { 
                 test: /\.js$/, 
                 exclude: /node_modules/, 
-                loader: 'babel'
+                use: ['babel-loader']
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            },
-            {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css?-autoprefixer!postcss!less")
+                test: /\.(less|css)$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "less-loader", "postcss-loader"]
+                })
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                loaders: [
-                    'file?hash=sha512&digest=hex&name=[hash].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-                ]
+                use: ['file-loader?limit=1000&name=[md5:hash:base64:10].[ext]']
             }
         ]
     },
-    postcss: [ autoprefixer({ browsers: ['iOS >= 8', 'Android >= 4.1'] }) ],
     
     plugins: [
         new webpack.EnvironmentPlugin([
             'NODE_ENV'
         ]),
-        new ExtractTextPlugin("[name]_[hash:6].css", {
+        new ExtractTextPlugin({ 
+            filename: "[name]_[hash:6].css",
             allChunks: true
         }),
         new webpack.optimize.UglifyJsPlugin({
@@ -64,7 +60,6 @@ module.exports = {
             template: 'app/html/index.html',
             hash: true
         }),
-        // new encodingPlugin('GBK'),
         new webpack.HotModuleReplacementPlugin()
     ]
 
