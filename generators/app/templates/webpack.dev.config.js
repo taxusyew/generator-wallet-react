@@ -10,7 +10,7 @@ var path = require('path');
 open('http://'+ip.address()+':8080');
 
 module.exports = {
-    entry: './app/scene/app.js',
+    entry: ['./app/scene/app.js'],
 
     output: {
         path: __dirname + '/dist',
@@ -40,6 +40,11 @@ module.exports = {
     },
     
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env':{
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.EnvironmentPlugin([
             'NODE_ENV'
         ]),

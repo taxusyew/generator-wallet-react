@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var DashboardPlugin = require('webpack-dashboard/plugin');
 var autoprefixer = require('autoprefixer');
 var ip = require('ip');
 var open = require("open");

@@ -101,7 +101,8 @@ module.exports = yeoman.Base.extend({
                 "react": "^15.5.4",
                 "react-dom": "^15.5.4",
                 "react-redux": "^5.0.4",
-                "react-router": "^4.1.1",
+                "react-router": "^2.0.0",
+                "react-router-dom": "^4.1.1",
                 "react-tap-event-plugin": "^1.0.0",
                 "react-tappable": "^0.8.4",
                 "react-transform-catch-errors": "^1.0.2",
@@ -122,7 +123,7 @@ module.exports = yeoman.Base.extend({
                 "less-loader": "^2.2.3",
                 "redux": "^3.5.2",
                 "style-loader": "^0.13.1",
-                "webpack-dev-server": "^1.14.1"
+                "webpack-dev-server": "^2.4.2"
             }
 
         });
