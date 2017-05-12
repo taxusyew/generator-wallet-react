@@ -82,13 +82,14 @@ module.exports = yeoman.Base.extend({
                 "build": "cross-env NODE_ENV=production webpack -p --config webpack.build.config.js"
             },
             "dependencies": {
-                "autoprefixer": "^6.4.1",
+                "autoprefixer": "^7.0.1",
                 "babel-eslint": "^6.1.2",
                 "babel-plugin-react-transform": "^2.0.2",
                 "babel-preset-stage-0": "^6.5.0",
                 "classnames": "^2.2.5",
                 "compression": "^1.6.1",
                 "cross-env": "^3.1.3",
+                "css-loader": "^0.28.1",
                 "es6-promise": "^4.0.5",
                 "express": "^4.13.4",
                 "html-webpack-plugin": "^2.24.1",
@@ -96,8 +97,10 @@ module.exports = yeoman.Base.extend({
                 "image-webpack-loader": "^3.0.0",
                 "ip": "^1.1.4",
                 "json-server": "^0.8.22",
+                "less-loader": "^4.0.3",
                 "open": "0.0.5",
-                "postcss-loader": "^0.13.0",
+                "postcss-load-config": "^1.2.0",
+                "postcss-loader": "^2.0.3",
                 "react": "^15.5.4",
                 "react-dom": "^15.5.4",
                 "react-redux": "^5.0.4",
@@ -115,12 +118,10 @@ module.exports = yeoman.Base.extend({
                 "babel-loader": "^6.2.2",
                 "babel-preset-es2015": "^6.5.0",
                 "babel-preset-react": "^6.5.0",
-                "css-loader": "^0.23.1",
                 "extract-text-webpack-plugin": "^2.1.0",
                 "file-loader": "^0.11.1",
                 "http-server": "^0.8.5",
                 "less": "^2.7.1",
-                "less-loader": "^2.2.3",
                 "redux": "^3.5.2",
                 "style-loader": "^0.13.1",
                 "webpack-dev-server": "^2.4.2"
@@ -193,6 +194,10 @@ module.exports = yeoman.Base.extend({
             this.destinationPath('.babelrc')
         );
 
+        this.fs.copy(
+            this.templatePath('postcss.config.js'),
+            this.destinationPath('postcss.config.js')
+        );
 
         this.fs.copy(
             this.templatePath('webpack.dev.config.js'),
