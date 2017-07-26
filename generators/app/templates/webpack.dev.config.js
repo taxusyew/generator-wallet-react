@@ -34,11 +34,15 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                use: ['file-loader?limit=1000&name=[md5:hash:base64:10].[ext]']
+                use: ['url-loader?limit=1300&name=[md5:hash:base64:10].[ext]']
             }
         ]
     },
-    
+    devtool: "eval",
+    devServer: {
+        host: '0.0.0.0',
+        disableHostCheck: true
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env':{
@@ -70,4 +74,3 @@ module.exports = {
 
 
 }
-

@@ -7,5 +7,5 @@ import IndexScene from './index/index.js';
 
 render(
     <IndexScene> </IndexScene>,
-    document.getElementById('app')
+    document.getElementById('root')
 );

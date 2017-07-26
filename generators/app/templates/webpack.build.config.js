@@ -4,14 +4,19 @@ var autoprefixer = require('autoprefixer');
 var ip = require('ip');
 var open = require("open");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 module.exports = {
-    entry: './app/scene/app.js',
-
+    entry: {
+        vendors: ['react', 'react-dom', 'react-router'],
+        app: path.resolve(__dirname, './app/scene/app.js')
+    },
+    
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle_[hash:6].js',
-        publicPath: ''
+        filename: '[name]_[hash:6].js',
+        // publicPath: ''
+        // publicPath: '//www.baifubao.com/static/exports/assets/'
     },
 
     module: {
@@ -30,7 +35,8 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
-                use: ['file-loader?limit=1000&name=[md5:hash:base64:10].[ext]']
+                // use: ['file-loader?limit=100000&name=[md5:hash:base64:10].[ext]']
+                use: ['url-loader?limit=1000&name=[md5:hash:base64:10].[ext]']
             }
         ]
     },
@@ -53,14 +59,26 @@ module.exports = {
                 comments: false
             }
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors',
+            minChunks: function (module) {
+                // this assumes your vendor imports exist in the node_modules directory
+                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
+        // new webpack.optimize.CommonsChunkPlugin({ name: 'vendors'}),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'app/html/index.html',
             hash: true
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [autoprefixer({ browsers: ['iOS >= 8', 'Android >= 4.1'] })]
+            }
         }),
         new webpack.HotModuleReplacementPlugin()
     ]
 
 
 }
-

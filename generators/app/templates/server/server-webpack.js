@@ -14,10 +14,12 @@ module.exports.start = function (PORT) {
         },
         inline: true,
         hot: true,
-        watchContentBase: true,
-        watchOptions: {
-            poll: true
-        }
+        // watchContentBase: true,
+        // watchOptions: {
+        //     poll: true
+        // },
+        disableHostCheck: true 
+        
         // ... rest of the options
     });
     server.listen(PORT, '0.0.0.0');

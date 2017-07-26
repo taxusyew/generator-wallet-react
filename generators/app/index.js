@@ -111,6 +111,8 @@ module.exports = yeoman.Base.extend({
                 "react-transform-catch-errors": "^1.0.2",
                 "react-transform-hmr": "^1.0.4",
                 "redbox-react": "^1.3.0",
+                "redux-thunk": "^2.2.0",
+                "url-loader": "^0.5.9",
                 "webpack": "^2.3.3"
             },
             "devDependencies": {

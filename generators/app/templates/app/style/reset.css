@@ -4,13 +4,22 @@
     -webkit-tap-highlight-color: transparent;
 }
 html, body {
-	-webkit-user-select: none;  
-	background-color: #FBF9FE;
-	color: #333;
-	height:100%;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-user-select: none;  
+    -webkit-font-smoothing: antialiased;
+    background-color: #fff;
+    color: #333;
+    height:100%;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    min-height: 100%;
 }
 a, a:link, a:visited, a:hover, a:active {
 	color: #6492E3;
 	text-decoration: none;
+}
+body.scroll-stop {
+    overflow: hidden;
+}
+input:disabled{  
+    opacity: 1;
+    -webkit-text-fill-color: #999999;
 }
